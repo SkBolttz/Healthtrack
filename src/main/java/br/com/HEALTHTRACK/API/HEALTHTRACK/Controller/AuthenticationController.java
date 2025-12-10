@@ -4,6 +4,7 @@ import br.com.HEALTHTRACK.API.HEALTHTRACK.DTO.Usuario.UsuarioLoginDTO;
 import br.com.HEALTHTRACK.API.HEALTHTRACK.DTO.Usuario.UsuarioRegistroDTO;
 import br.com.HEALTHTRACK.API.HEALTHTRACK.Entity.Usuario;
 import br.com.HEALTHTRACK.API.HEALTHTRACK.Repository.UsuarioRepository;
+import br.com.HEALTHTRACK.API.HEALTHTRACK.Security.TokenService;
 import br.com.HEALTHTRACK.API.HEALTHTRACK.Service.AuthorizationService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Objects;
+
 @RestController
 @RequestMapping("/entrar")
 public class AuthenticationController {
@@ -24,15 +27,18 @@ public class AuthenticationController {
     private final UsuarioRepository usuarioRepository;
     private final AuthenticationManager authenticationManager;
     private final PasswordEncoder passwordEncoder;
+    private final TokenService tokenService;
 
     public AuthenticationController(
             UsuarioRepository usuarioRepository,
             AuthenticationManager authenticationManager,
-            PasswordEncoder passwordEncoder
+            PasswordEncoder passwordEncoder,
+            TokenService tokenService
     ) {
         this.usuarioRepository = usuarioRepository;
         this.authenticationManager = authenticationManager;
         this.passwordEncoder = passwordEncoder;
+        this.tokenService = tokenService;
     }
 
     @PostMapping("/login")
@@ -41,7 +47,9 @@ public class AuthenticationController {
             var usernamePassword = new UsernamePasswordAuthenticationToken(loginDTO.email(), loginDTO.senha());
             var auth = authenticationManager.authenticate(usernamePassword);
 
-            return ResponseEntity.status(200).body("Usuário logado com sucesso: " + auth.getPrincipal());
+            var token = tokenService.gerarToken((Usuario) Objects.requireNonNull(auth.getPrincipal()));
+
+            return ResponseEntity.status(200).body("Usuário logado com sucesso: " + token);
         } catch (Exception e){
             throw new UsernameNotFoundException("Usuário ou senha inválidos!");
         }
