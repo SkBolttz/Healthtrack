@@ -1,13 +1,11 @@
 package br.com.HEALTHTRACK.API.HEALTHTRACK.Controller;
 
-import br.com.HEALTHTRACK.API.HEALTHTRACK.DTO.Usuario.UsuarioLoginDTO;
-import br.com.HEALTHTRACK.API.HEALTHTRACK.DTO.Usuario.UsuarioRegistroDTO;
+import br.com.HEALTHTRACK.API.HEALTHTRACK.DTO.UsuarioLoginDTO;
+import br.com.HEALTHTRACK.API.HEALTHTRACK.DTO.UsuarioRegistroDTO;
 import br.com.HEALTHTRACK.API.HEALTHTRACK.Entity.Usuario;
 import br.com.HEALTHTRACK.API.HEALTHTRACK.Repository.UsuarioRepository;
 import br.com.HEALTHTRACK.API.HEALTHTRACK.Security.TokenService;
-import br.com.HEALTHTRACK.API.HEALTHTRACK.Service.AuthorizationService;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Map;
+
 @RestController
 @RequestMapping("/paciente")
 public class PacienteController {
@@ -15,4 +17,5 @@ public class PacienteController {
     public PacienteService getPacienteService() {
         return pacienteService;
     }
+
 }
