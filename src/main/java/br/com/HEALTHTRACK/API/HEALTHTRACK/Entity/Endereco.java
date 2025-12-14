@@ -1,11 +1,19 @@
 package br.com.HEALTHTRACK.API.HEALTHTRACK.Entity;
 
+import br.com.HEALTHTRACK.API.HEALTHTRACK.DTO.Endereco.CepDto;
 import br.com.HEALTHTRACK.API.HEALTHTRACK.Enum.EnderecoEnum.UF;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import lombok.*;
+import tools.jackson.databind.ObjectMapper;
+
+import java.io.IOException;
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
 
 @Getter
 @Setter
@@ -25,6 +33,7 @@ public class Endereco {
 
     @NotBlank
     private String bairro;
+
 
     @NotBlank
     private String cidade;

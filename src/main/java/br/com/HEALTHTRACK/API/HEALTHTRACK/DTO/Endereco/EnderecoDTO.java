@@ -1,4 +1,4 @@
-package br.com.HEALTHTRACK.API.HEALTHTRACK.DTO;
+package br.com.HEALTHTRACK.API.HEALTHTRACK.DTO.Endereco;
 
 import br.com.HEALTHTRACK.API.HEALTHTRACK.Enum.EnderecoEnum.UF;
 
