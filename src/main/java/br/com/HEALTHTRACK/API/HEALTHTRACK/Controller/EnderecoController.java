@@ -1,13 +1,12 @@
 package br.com.HEALTHTRACK.API.HEALTHTRACK.Controller;
 
-import br.com.HEALTHTRACK.API.HEALTHTRACK.DTO.EnderecoDTO;
-import br.com.HEALTHTRACK.API.HEALTHTRACK.DTO.EnderecoResponseDTO;
+import br.com.HEALTHTRACK.API.HEALTHTRACK.DTO.Endereco.EnderecoDTO;
+import br.com.HEALTHTRACK.API.HEALTHTRACK.DTO.Endereco.EnderecoResponseDTO;
 import br.com.HEALTHTRACK.API.HEALTHTRACK.Service.EnderecoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
 import java.util.Map;
 
 @RestController
