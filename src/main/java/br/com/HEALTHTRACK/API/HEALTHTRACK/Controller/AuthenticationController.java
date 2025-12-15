@@ -3,6 +3,8 @@ package br.com.HEALTHTRACK.API.HEALTHTRACK.Controller;
 import br.com.HEALTHTRACK.API.HEALTHTRACK.DTO.UsuarioLoginDTO;
 import br.com.HEALTHTRACK.API.HEALTHTRACK.DTO.UsuarioRegistroDTO;
 import br.com.HEALTHTRACK.API.HEALTHTRACK.Entity.Usuario;
+import br.com.HEALTHTRACK.API.HEALTHTRACK.Mapper.PacienteMapper;
+import br.com.HEALTHTRACK.API.HEALTHTRACK.Mapper.UsuarioMapper;
 import br.com.HEALTHTRACK.API.HEALTHTRACK.Repository.UsuarioRepository;
 import br.com.HEALTHTRACK.API.HEALTHTRACK.Security.TokenService;
 import jakarta.validation.Valid;
@@ -26,6 +28,8 @@ public class AuthenticationController {
     private final AuthenticationManager authenticationManager;
     private final PasswordEncoder passwordEncoder;
     private final TokenService tokenService;
+    @Autowired
+    private UsuarioMapper usuarioMapper;
 
     public AuthenticationController(
             UsuarioRepository usuarioRepository,
@@ -65,30 +69,13 @@ public class AuthenticationController {
         }
 
         if (registroDTO.profissionalSaude() != null) {
-            Usuario novoUsuario = Usuario.builder()
-                    .username(registroDTO.email())
-                    .senha(senhaCriptografada)
-                    .role(registroDTO.role())
-                    .profissionalSaude(registroDTO.profissionalSaude())
-                    .ativo(true)
-                    .build();
+            Usuario novoUsuario = usuarioMapper.converterRegistroEntidade(registroDTO);
             usuarioRepository.save(novoUsuario);
         } else if (registroDTO.paciente() != null) {
-            Usuario novoUsuario = Usuario.builder()
-                    .username(registroDTO.email())
-                    .senha(senhaCriptografada)
-                    .role(registroDTO.role())
-                    .paciente(registroDTO.paciente())
-                    .ativo(true)
-                    .build();
+            Usuario novoUsuario = usuarioMapper.converterRegistroEntidade(registroDTO);
             usuarioRepository.save(novoUsuario);
         } else {
-            Usuario novoUsuario = Usuario.builder()
-                    .username(registroDTO.email())
-                    .senha(senhaCriptografada)
-                    .role(registroDTO.role())
-                    .ativo(true)
-                    .build();
+            Usuario novoUsuario = usuarioMapper.converterRegistroEntidade(registroDTO);
             usuarioRepository.save(novoUsuario);
         }
         return ResponseEntity.status(201).body("Usuário registrado com sucesso!");
