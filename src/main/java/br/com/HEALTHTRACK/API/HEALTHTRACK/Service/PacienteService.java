@@ -23,10 +23,10 @@ import java.util.List;
 public class PacienteService {
 
     private final PacienteRepository pacienteRepository;
-    @Autowired
-    private PacienteMapper pacienteMapper;
+    private final PacienteMapper pacienteMapper;
 
-    public PacienteService(PacienteRepository pacienteRepository) {
+    public PacienteService(PacienteRepository pacienteRepository, PacienteMapper pacienteMapper) {
+        this.pacienteMapper = pacienteMapper;
         this.pacienteRepository = pacienteRepository;
     }
 
@@ -50,7 +50,7 @@ public class PacienteService {
         return pacienteMapper.converterPacienteDtoDetalhes(paciente);
     }
 
-    public void atualizarPaciente(Long id, PacienteAtualizacaoDTO dto) {
+    public PacienteDetalhesDTO atualizarPaciente(Long id, PacienteAtualizacaoDTO dto) {
 
         Paciente paciente = buscarPaciente(id);
 
@@ -62,9 +62,11 @@ public class PacienteService {
         if (dto.numeroSus() != null) paciente.setNumeroSus(dto.numeroSus());
 
         pacienteRepository.save(paciente);
+
+        return pacienteMapper.converterPacienteDtoDetalhes(paciente);
     }
 
-    public void desativarPaciente(Long id) {
+    public PacienteDetalhesDTO desativarPaciente(Long id) {
         Paciente paciente = buscarPaciente(id);
 
         if (paciente.getStatusPaciente() != StatusPaciente.ATIVO)
@@ -72,9 +74,11 @@ public class PacienteService {
 
         paciente.setStatusPaciente(StatusPaciente.INATIVO);
         pacienteRepository.save(paciente);
+
+        return pacienteMapper.converterPacienteDtoDetalhes(paciente);
     }
 
-    public void ativarPaciente(Long id) {
+    public PacienteDetalhesDTO ativarPaciente(Long id) {
         Paciente paciente = buscarPaciente(id);
 
         if (paciente.getStatusPaciente() == StatusPaciente.ATIVO)
@@ -82,6 +86,8 @@ public class PacienteService {
 
         paciente.setStatusPaciente(StatusPaciente.ATIVO);
         pacienteRepository.save(paciente);
+
+        return pacienteMapper.converterPacienteDtoDetalhes(paciente);
     }
 
     public PacienteDetalhesDTO buscarDetalhes(Long id) {
