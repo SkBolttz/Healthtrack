@@ -49,7 +49,7 @@ public class Paciente {
     private Endereco endereco;
     @OneToMany(mappedBy = "paciente", cascade = CascadeType.ALL)
     @Valid
-    private List<Doenca> doencas;
+    private List<DoencaPaciente> doencas;
     @ManyToOne
     @Valid
     private ProfissionalSaude profissionalSaude;
