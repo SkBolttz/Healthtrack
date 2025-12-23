@@ -10,11 +10,6 @@ import java.util.List;
 public interface PacienteMapper {
 
     Paciente convertePacienteEntidadeCadastro(PacienteCadastroDTO pacienteCadastroDTO);
-    Paciente convertePacienteEntidadeAtualizacao(PacienteAtualizacaoDTO pacienteAtualizacaoDTO);
-    Paciente convertePacienteEntidadeAtualizacaoParcial(PacienteAtualizacaoParcialDTO pacienteAtualizacaoParcialDTO);
-    Paciente convertePacienteEntidadeDetalhe(PacienteDetalhesDTO pacienteDetalhesDTO);
-    Paciente convertePacienteEntidadeResumo(PacienteResumoDTO pacienteResumoDTO);
-
     PacienteDetalhesDTO converterPacienteDtoDetalhes(Paciente paciente);
     PacienteResumoDTO converterPacienteResumoDto(Paciente paciente);
 }

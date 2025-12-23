@@ -22,6 +22,7 @@ public class Doenca {
     private Long id;
 
     @NotBlank
+    @Column(unique = true)
     private String nomeDoenca;
 
     @NotBlank
