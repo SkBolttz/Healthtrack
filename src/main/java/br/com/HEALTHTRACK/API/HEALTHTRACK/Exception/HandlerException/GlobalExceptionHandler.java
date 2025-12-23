@@ -2,6 +2,9 @@ package br.com.HEALTHTRACK.API.HEALTHTRACK.Exception.HandlerException;
 
 import br.com.HEALTHTRACK.API.HEALTHTRACK.Exception.HandlerException.Autenticacao.ErroDuploTipoUsuario;
 import br.com.HEALTHTRACK.API.HEALTHTRACK.Exception.HandlerException.Autenticacao.ErroUsuarioExistente;
+import br.com.HEALTHTRACK.API.HEALTHTRACK.Exception.HandlerException.Doenca.CodigoCidDuplicado;
+import br.com.HEALTHTRACK.API.HEALTHTRACK.Exception.HandlerException.Doenca.CodigoCidNaoLocalizado;
+import br.com.HEALTHTRACK.API.HEALTHTRACK.Exception.HandlerException.Doenca.NomeDoencaDuplicada;
 import br.com.HEALTHTRACK.API.HEALTHTRACK.Exception.HandlerException.Paciente.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -126,6 +129,27 @@ public class GlobalExceptionHandler {
     public ResponseEntity<?> handlePacienteNaoLocalizado (PacienteNaoLocalizado ex){
         return ResponseEntity
                 .status(HttpStatus.NOT_FOUND)
+                .body(Map.of("erro", ex.getMessage()));
+    }
+
+    @ExceptionHandler(CodigoCidDuplicado.class)
+    public ResponseEntity<?> handleCodigoCidDuplicado(CodigoCidDuplicado ex){
+        return ResponseEntity
+                .status(HttpStatus.CONFLICT)
+                .body(Map.of("erro", ex.getMessage()));
+    }
+
+    @ExceptionHandler(CodigoCidNaoLocalizado.class)
+    public ResponseEntity<?> handleCodigoCidNaoLocalizado(CodigoCidNaoLocalizado ex){
+        return ResponseEntity
+                .status(HttpStatus.NOT_FOUND)
+                .body(Map.of("erro", ex.getMessage()));
+    }
+
+    @ExceptionHandler(NomeDoencaDuplicada.class)
+    public ResponseEntity<?> handleNomeDoencaDuplicada(NomeDoencaDuplicada ex){
+        return ResponseEntity
+                .status(HttpStatus.CONFLICT)
                 .body(Map.of("erro", ex.getMessage()));
     }
 }
