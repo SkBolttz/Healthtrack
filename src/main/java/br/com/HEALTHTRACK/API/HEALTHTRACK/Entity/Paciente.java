@@ -42,11 +42,12 @@ public class Paciente {
     @NotNull
     @Pattern(regexp = "\\d{11}", message = "O número de telefone deve conter 11 digitos!")
     private String telefone;
+
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "endereco_id")
     @Valid
-    @NotNull
     private Endereco endereco;
+
     @OneToMany(mappedBy = "paciente", cascade = CascadeType.ALL)
     @Valid
     private List<DoencaPaciente> doencas;
