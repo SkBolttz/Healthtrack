@@ -14,12 +14,12 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class DoencaSerivce {
+public class DoencaService {
 
     private final DoencaRepository doencaRepository;
     private final DoencaMapper doencaMapper;
 
-    public DoencaSerivce(DoencaRepository doencaRepository, DoencaMapper doencaMapper) {
+    public DoencaService(DoencaRepository doencaRepository, DoencaMapper doencaMapper) {
         this.doencaRepository = doencaRepository;
         this.doencaMapper = doencaMapper;
     }

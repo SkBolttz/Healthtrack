@@ -32,13 +32,8 @@ public class TratamentoController {
 
 
     @PostMapping("/registra")
-    public ResponseEntity<Map<String,String>> registraTratamento(TratamentoDTO tratamentoDTO){
-        try{
-            TratamentoDetalheDTO tratamentoDetalheDTO = tratamentoService.registra(tratamentoDTO);
-            return ResponseEntity.status(200).body(Map.of("Sucesso!", "Tratamento cadastrado"));
-        }catch (ErroCadastrarTratamento e){
-            return ResponseEntity.status(500).body(Map.of("Error!", "Não foi possivel cadastrar o tratamento"));
-        }
+    public ResponseEntity<Map<String, TratamentoDetalheDTO>> registraTratamento(TratamentoDTO tratamentoDTO) {
+        return ResponseEntity.status(200).body(Map.of("Sucesso!", tratamentoService.registra(tratamentoDTO)));
     }
 
 }

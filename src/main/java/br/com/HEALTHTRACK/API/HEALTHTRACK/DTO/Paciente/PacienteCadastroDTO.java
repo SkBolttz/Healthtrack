@@ -25,7 +25,6 @@ public record PacienteCadastroDTO(
         String email,
         @NotBlank
         String telefone,
-        @NotNull
         Endereco endereco,
         @NotNull
         Sexo sexo,
